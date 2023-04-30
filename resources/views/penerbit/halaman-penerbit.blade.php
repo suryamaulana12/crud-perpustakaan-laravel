@@ -29,48 +29,43 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Data Buku Perpustakaan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Data Penerbit Perpustakaan</h1>
                     <hr style="margin-bottom: 10px">
                 </div>
 
 
                 <div class="row">
                     <div class="card-body">
-                        <a href="{{ route('tambah-buku') }}"><button type="button" class="btn btn-success mb-3 ml-1">+
-                                TambahBuku</button></a>
+                        <a href="{{ route('tambah-penerbit') }}"><button type="button"
+                                class="btn btn-success mb-3 ml-1">+
+                                Tambah Penerbit</button></a>
 
                         <table class="table table-hover col-12 text-center justify-content-center">
                             <thead class="" style="font-weight: bold">
                                 <td>No</td>
-                                <td>Judul</td>
-                                <td>Pengarang</td>
-                                <td>Penerbit</td>
-                                <td>Genre</td>
-                                <td>Tahun Terbit</td>
-                                <td>Gambar</td>
+                                <td>Nama</td>
+                                <td>Terbitan Populer</td>
+                                <td>Alamat</td>
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($buku as $item)
+                            @foreach ($dtpenerbit as $item)
                                 <tbody class="table-striped">
                                     <td><?= $i ?></td>
-                                    <td>{{ $item->judul }}</td>
-                                    <td>{{ $item->pengarang }}</td>
-                                    <td>{{ $item->penerbit }}</td>
-                                    <td>{{ $item->genre }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($item->tahun_terbit)) }}</td>
-                                    <td><img src="{{ asset('template/img/' . $item->gambar) }}" width="30%"
-                                            height="30%" alt=""></td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->terbitan_populer }}</td>
+                                    <td>{{ $item->alamat }}</td>
                                     <td>
-                                        <a href="{{ url('edit-buku', $item->id) }}"><button type="submit"
+                                        <a href="{{ url('edit-penerbit', $item->id) }}"><button type="submit"
                                                 class="btn btn-warning" style="margin-right: 5px;"><i
                                                     class="fas fa-pen"></i></button></a>
-                                        <a href="{{ url('delete-buku', $item->id) }}"><button type="submit"
+                                        <a href="{{ url('delete-penerbit', $item->id) }}"><button type="submit"
                                                 class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
                                     </td>
                                 </tbody>
                                 <?php $i++; ?>
                             @endforeach
+
                         </table>
                     </div>
 

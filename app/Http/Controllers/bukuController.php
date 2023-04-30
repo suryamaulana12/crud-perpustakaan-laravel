@@ -71,9 +71,22 @@ class bukuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $edit = buku::findorfail($id);
-        $edit->update($request->all());
+        $ubah = buku::findorfail($id);
+        $awal = $ubah->gambar;
 
+        $edit = [
+            'judul' => $request['judul'],
+            'pengarang' => $request['pengarang'],
+            'penerbit' => $request['penerbit'],
+            'genre' => $request['genre'],
+            'tahun_terbit' => $request['tahun_terbit'],
+            'gambar' => $awal,
+        ];
+        
+        $request->gambar->move(public_path().'/template/img', $awal);
+        $ubah->update($edit);
+
+    
         return redirect('halaman-buku')->with('success', 'Data Berhasil Update!');
     }
 
@@ -83,7 +96,12 @@ class bukuController extends Controller
     public function destroy($id)
     {
         $hapus = buku::findorfail($id);
+
+        $file = public_path('/template/img/').$hapus->gambar;
+       if (file_exists($file)) {
+            @unlink($file);
+       }
         $hapus->delete();
-        return back()->with('info', 'Data Berhasil Terhapus!');
+        return back()->with('success', 'Data Berhasil Terhapus!');
     }
 }

@@ -31,9 +31,17 @@
                 <h6 class="collapse-header">Daftar Halaman:</h6>
                 <a class="collapse-item" href="{{ route('halaman-buku') }}">Data Buku</a>
                 <a class="collapse-item" href="register.html">Data anggota</a>
-                <a class="collapse-item" href="forgot-password.html">Data Petugas</a>
-                <a class="collapse-item" href="404.html">Data Pengarang</a>
-                <a class="collapse-item " href="blank.html">Data Penerbit</a>
+                <a class="collapse-item mb-1" href="forgot-password.html">Data Petugas</a>
+                <div class="dropright">
+                    <a class="dropdown-toggle collapse-item" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" href="#"
+                        style="text-decoration: none; margin-left: 10px; color: black">Pengarang</a>
+                    <div class="dropdown-menu">
+                        <a class="collapse-item" href="{{ route('halaman-pengarang') }}">Data Pengarang</a>
+                        <a class="collapse-item" href="{{ route('halaman-karya-pengarang') }}">Data Karya Pengarang</a>
+                    </div>
+                </div>
+                <a class="collapse-item mt-1" href="{{ route('halaman-penerbit') }}">Data Penerbit</a>
             </div>
         </div>
     </li>

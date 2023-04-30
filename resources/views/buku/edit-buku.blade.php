@@ -37,7 +37,7 @@
                 <div class="row justify-content-center">
                     <div class="col-10">
 
-                        <form action="{{ url('update-buku', $edit->id) }}" method="post">
+                        <form action="{{ url('update-buku', $edit->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
@@ -99,8 +99,10 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="formFile" class="form-label">Masukan gambar Buku :</label>
-                                <input class="form-control" type="text" id="formFile" name="gambar"
+                                <label for="formFile" class="form-label">Edit gambar Buku :</label><br>
+                                <img src="{{ asset('template/img/' . $edit->gambar) }}" width="10%" height="10%"
+                                    alt="">
+                                <input class="form-control mt-3" type="file" id="formFile" name="gambar"
                                     value="{{ $edit->gambar }}">
                             </div>
 
