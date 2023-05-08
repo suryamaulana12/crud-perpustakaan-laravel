@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Dashboard</title>
+    <title>Perpustakaan | Edit Penerbit</title>
     @include('template.head')
 
 </head>
@@ -40,10 +40,13 @@
                             {{ csrf_field() }}
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
+                                <input type="text" class="form-control" placeholder="Masukan Nama Penerbit"
                                     aria-label="judul" aria-describedby="basic-addon1" name="nama"
                                     value="{{ $edit->nama }}" required>
                             </div>
+                            @error('nama')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
@@ -51,6 +54,9 @@
                                     aria-label="penerbit" aria-describedby="basic-addon1" name="terbitan_populer"
                                     value="{{ $edit->terbitan_populer }}" required>
                             </div>
+                            @error('terbitan_populer')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
@@ -58,9 +64,23 @@
                                     aria-label="alamat" aria-describedby="basic-addon1" name="alamat"
                                     value="{{ $edit->alamat }}" required>
                             </div>
+                            @error('alamat')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                <input type="number" class="form-control" placeholder="Masukan Telepon Penerbit"
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="no_telepon"
+                                    value="{{ $edit->no_telepon }}">
+                            </div>
+                            @error('no_telepon')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
 
-                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+
+                            <button type="submit" class="btn btn-primary">Edit Data</button>
                             <a href="/halaman-penerbit" class="btn btn-danger">Kembali</a>
                         </form>
 
@@ -86,24 +106,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('template.logout')
 
         @include('template.script')
 

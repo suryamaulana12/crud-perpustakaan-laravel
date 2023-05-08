@@ -13,8 +13,4 @@ class pengarang extends Model
         'id', 'nama', 'jenis_kelamin', 'alamat', 'karya_id'
     ];
     protected $guarded = [];
-
-    public function karya_pengarang(){
-        return $this->hasMany(karya_pengarang::class);
-    }
 }

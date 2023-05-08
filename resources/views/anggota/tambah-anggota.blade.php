@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Edit Pengarang</title>
+    <title>Perpustakaan | Tambah Anggota</title>
     @include('template.head')
 
 </head>
@@ -29,21 +29,19 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Tambah Pengarang Perpustakaan</h1>
-                    <hr style="margin-bottom: 20px">
+                    <h1 class="h3 mb-4 text-gray-800">Tambah Anggota Perpustakaan</h1>
+                    <hr style="margin-bottom: 50px">
                 </div>
-
 
                 <div class="row justify-content-center">
                     <div class="col-10">
 
-                        <form action="{{ url('update-pengarang', $edit->id) }}" method="post">
+                        <form action="{{ route('simpan-anggota') }}" method="post">
                             {{ csrf_field() }}
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama"
-                                    value="{{ $edit->nama }}">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" placeholder="Masukan Nama Anggota"
+                                    aria-label="judul" aria-describedby="basic-addon1" name="nama">
                             </div>
                             @error('nama')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -52,16 +50,14 @@
                             <label for="">Masukan Jenis Kelamin :</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault1" value="Laki-laki" value="<?= $edit['jenis_kelamin'] ?>"
-                                    <?= $edit['jenis_kelamin'] == 'Laki-laki' ? 'checked' : '' ?>>
+                                    id="flexRadioDefault1" value="Laki-laki">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki-laki
                                 </label>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault12" value="Perempuan" value="<?= $edit['jenis_kelamin'] ?>"
-                                    <?= $edit['jenis_kelamin'] == 'Perempuan' ? 'checked' : '' ?>>
+                                    id="flexRadioDefault12" value="Perempuan">
                                 <label class="form-check-label" for="flexRadioDefault12">
                                     Perempuan
                                 </label>
@@ -70,30 +66,27 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                <input type="number" class="form-control" placeholder="Masukan Usia Anggota"
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="usia">
+                            </div>
+                            @error('usia')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="alamat"
-                                    value="{{ $edit->alamat }}">
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
+                                <input type="text" class="form-control" placeholder="Masukan Alamat Anggota"
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat">
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Karya Pengarang"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="karya_pengarang"
-                                    value="{{ $edit->karya_pengarang }}">
-                            </div>
-                            @error('karya_pengarang')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
-
-                            <button type="submit" class="btn btn-primary">Edit Data</button>
-                            <a href="/halaman-pengarang" class="btn btn-danger">Kembali</a>
+                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                            <a href="/halaman-anggota" class="btn btn-danger">Kembali</a>
                         </form>
 
                     </div>

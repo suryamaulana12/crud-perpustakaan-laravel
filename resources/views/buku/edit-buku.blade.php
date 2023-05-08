@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Dashboard</title>
+    <title>Perpustakaan | Edit Buku</title>
     @include('template.head')
 
 </head>
@@ -43,60 +43,51 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Judul Buku"
                                     aria-label="judul" aria-describedby="basic-addon1" name="judul"
-                                    value="{{ $edit->judul }}" required>
+                                    value="{{ $edit->judul }}">
                             </div>
+                            @error('judul')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
                                     aria-label="pengarang" aria-describedby="basic-addon1" name="pengarang"
-                                    value="{{ $edit->pengarang }}" required>
+                                    value="{{ $edit->pengarang }}">
                             </div>
+                            @error('pengarang')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Penerbit"
                                     aria-label="penerbit" aria-describedby="basic-addon1" name="penerbit"
-                                    value="{{ $edit->penerbit }}" required>
+                                    value="{{ $edit->penerbit }}">
                             </div>
+                            @error('penerbit')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
-                            <label for="">Genre Buku :</label>
-                            <div style="margin-left: 25px;">
-                                <div class="input-group mb-2">
-                                    <input class="form-check-input" type="checkbox" value="Romantis" name="genre"
-                                        id="flexCheckDefault" value="<?= $edit['genre'] ?>"
-                                        <?= $edit['genre'] == 'Romantis' ? 'checked' : '' ?>>
-                                    <label class=" form-check-label" for="flexCheckDefault" romantis>
-                                        Romantis
-                                    </label>
-                                </div>
-
-                                <div class="input-group mb-2">
-                                    <input class="form-check-input" type="checkbox" value="Pendidikan" name="genre"
-                                        id="flexCheckDefaultt" value="<?= $edit['genre'] ?>"
-                                        <?= $edit['genre'] == 'Pendidikan' ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="flexCheckDefaultt" Pendidikan>
-                                        Pendidikan
-                                    </label>
-                                </div>
-
-                                <div class="input-group mb-2">
-                                    <input class="form-check-input" type="checkbox" value="Misteri" name="genre"
-                                        id="misteri" value="<?= $edit['genre'] ?>"
-                                        <?= $edit['genre'] == 'Misteri' ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="misteri" misteri>
-                                        Misteri
-                                    </label>
-                                </div>
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Edit Genre Buku :</label>
+                                <select class="form-control select" name="genre_id" id="genre_id">
+                                    <option disabled value>---Pilih Genre---</option>
+                                    <option value="{{ $edit->genre_id }}">{{ $edit->genre->genre }}</option>
+                                    @foreach ($genre as $item)
+                                        <option value="{{ $item->id }}">{{ $item->genre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <label for="" style="font-size: 15px; color: red;">Pilih salah satu *</label>
-
 
                             <div class="input-group mb-4">
                                 <input type="date" class="form-control" placeholder="Masukan link Buku"
                                     aria-label="link" aria-describedby="basic-addon1" name="tahun_terbit"
                                     value="<?= date('Y-m-d', strtotime($edit['tahun_terbit'])) ?>">
                             </div>
+                            @error('tahun_terbit')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="mb-4">
                                 <label for="formFile" class="form-label">Edit gambar Buku :</label><br>
@@ -105,6 +96,9 @@
                                 <input class="form-control mt-3" type="file" id="formFile" name="gambar"
                                     value="{{ $edit->gambar }}">
                             </div>
+                            @error('gambar')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <button type="submit" class="btn btn-primary">Edit Data</button>
                             <a href="/halaman-buku" class="btn btn-danger">Kembali</a>
@@ -132,24 +126,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('template.logout')
 
         @include('template.script')
 

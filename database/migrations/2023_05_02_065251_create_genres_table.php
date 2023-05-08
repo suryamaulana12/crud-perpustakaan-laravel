@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penerbit', function (Blueprint $table) {
+        Schema::create('genre', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 100);
-            $table->string('terbitan_populer', 100);
-            $table->string('alamat', 100);
-            $table->string('no_telepon', 14);
+            $table->string('genre', 100);
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penerbit');
+        Schema::dropIfExists('genre');
     }
 };

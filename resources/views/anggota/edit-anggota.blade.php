@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Edit Pengarang</title>
+    <title>Perpustakaan | Edit Anggota</title>
     @include('template.head')
 
 </head>
@@ -29,18 +29,17 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Tambah Pengarang Perpustakaan</h1>
-                    <hr style="margin-bottom: 20px">
+                    <h1 class="h3 mb-4 text-gray-800">Edit Anggota Perpustakaan</h1>
+                    <hr style="margin-bottom: 50px">
                 </div>
-
 
                 <div class="row justify-content-center">
                     <div class="col-10">
 
-                        <form action="{{ url('update-pengarang', $edit->id) }}" method="post">
+                        <form action="{{ route('update-anggota', $edit->id) }}" method="post">
                             {{ csrf_field() }}
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
                                     aria-label="judul" aria-describedby="basic-addon1" name="nama"
                                     value="{{ $edit->nama }}">
@@ -70,30 +69,30 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                <input type="number" class="form-control" placeholder="Masukan Usia Anggota"
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="usia"
+                                    value="{{ $edit->usia }}">
+                            </div>
+                            @error('usia')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="alamat"
+
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
+                                <input type="text" class="form-control" placeholder="Masukan Alamat Penerbit"
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat"
                                     value="{{ $edit->alamat }}">
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Karya Pengarang"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="karya_pengarang"
-                                    value="{{ $edit->karya_pengarang }}">
-                            </div>
-                            @error('karya_pengarang')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
-
-                            <button type="submit" class="btn btn-primary">Edit Data</button>
-                            <a href="/halaman-pengarang" class="btn btn-danger">Kembali</a>
+                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                            <a href="/halaman-anggota" class="btn btn-danger">Kembali</a>
                         </form>
 
                     </div>

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('judul', 100);
             $table->string('pengarang', 100);
             $table->string('penerbit', 100);
-            $table->string('genre', 100);
+            $table->bigInteger('genre_id')->index();
             $table->string('tahun_terbit', 100);
-            $table->string('gambar', 225);
+            $table->string('gambar', 225)->nullable();
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Dashboard</title>
+    <title>Perpustakaan | Halaman Buku</title>
     @include('template.head')
 
 </head>
@@ -57,7 +57,7 @@
                                     <td>{{ $item->judul }}</td>
                                     <td>{{ $item->pengarang }}</td>
                                     <td>{{ $item->penerbit }}</td>
-                                    <td>{{ $item->genre }}</td>
+                                    <td>{{ $item->genre->genre }}</td>
                                     <td>{{ date('d-m-Y', strtotime($item->tahun_terbit)) }}</td>
                                     <td><img src="{{ asset('template/img/' . $item->gambar) }}" width="30%"
                                             height="30%" alt=""></td>
@@ -65,13 +65,40 @@
                                         <a href="{{ url('edit-buku', $item->id) }}"><button type="submit"
                                                 class="btn btn-warning" style="margin-right: 5px;"><i
                                                     class="fas fa-pen"></i></button></a>
-                                        <a href="{{ url('delete-buku', $item->id) }}"><button type="submit"
-                                                class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                                        <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"><i
+                                                class="fas fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tbody>
                                 <?php $i++; ?>
                             @endforeach
                         </table>
+
+                        <script src="https://code.jquery.com/jquery-3.6.4.slim.js"
+                            integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                        <script>
+                            $('.delete').click(function() {
+                                var anggotaid = $(this).attr('data-id');
+                                swal({
+                                        title: "Apakah anda yakin?",
+                                        text: "Data ini ingin dihapus!",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                                            window.location = "/delete-buku/" + anggotaid + ""
+                                            swal("Data berhasil dihapus!", {
+                                                icon: "success",
+                                            });
+                                        } else {
+                                            swal("Data tidak jadi dihapus!");
+                                        }
+                                    });
+                            });
+                        </script>
                     </div>
 
 
@@ -98,24 +125,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('template.logout')
 
     @include('template.script')
     @include('sweetalert::alert')

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Perpustakaan | Halaman Penerbit</title>
+    <title>Perpustakaan | Halaman Petugas</title>
     @include('template.head')
 
 </head>
@@ -29,38 +29,32 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Data Penerbit Perpustakaan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Data Petugas Perpustakaan</h1>
                     <hr style="margin-bottom: 10px">
                 </div>
 
 
                 <div class="row">
                     <div class="card-body">
-                        <a href="{{ route('tambah-penerbit') }}"><button type="button"
-                                class="btn btn-success mb-3 ml-1">+
-                                Tambah Penerbit</button></a>
+                        <a href="/register"><button type="button" class="btn btn-success mb-3 ml-1">+
+                                Tambah Petugas</button></a>
 
                         <table class="table table-hover col-12 text-center justify-content-center">
                             <thead class="" style="font-weight: bold">
                                 <td>No</td>
                                 <td>Nama</td>
-                                <td>Terbitan Populer</td>
-                                <td>Alamat</td>
-                                <td>No Telepon</td>
+                                <td>Email</td>
+                                <td>Password</td>
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($dtpenerbit as $item)
+                            @foreach ($users as $item)
                                 <tbody class="table-striped">
                                     <td><?= $i ?></td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->terbitan_populer }}</td>
-                                    <td>{{ $item->alamat }}</td>
-                                    <td>{{ $item->no_telepon }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->password }}</td>
                                     <td>
-                                        <a href="{{ url('edit-penerbit', $item->id) }}"><button type="submit"
-                                                class="btn btn-warning" style="margin-right: 5px;"><i
-                                                    class="fas fa-pen"></i></button></a>
                                         <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"><i
                                                 class="fas fa-trash"></i>
                                         </a>
@@ -85,7 +79,7 @@
                                     })
                                     .then((willDelete) => {
                                         if (willDelete) {
-                                            window.location = "/delete-penerbit/" + anggotaid + ""
+                                            window.location = "/delete-petugas/" + anggotaid + ""
                                             swal("Data berhasil dihapus!", {
                                                 icon: "success",
                                             });

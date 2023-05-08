@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\anggota;
 use Illuminate\Http\Request;
-use App\Models\pengarang;
 
-
-class pengarangController extends Controller
+class anggotaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       $dtpengarang = pengarang::all();
-        return view('pengarang.halaman-pengarang', compact('dtpengarang'));
+         $dtanggota = anggota::all();
+        return view('anggota.halaman-anggota', compact('dtanggota'));
     }
 
     /**
@@ -22,7 +21,7 @@ class pengarangController extends Controller
      */
     public function create()
     {
-        return view('pengarang.tambah-pengarang');
+         return view('anggota.tambah-anggota');
     }
 
     /**
@@ -30,26 +29,26 @@ class pengarangController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,[
+        $this->validate($request,[
             'nama' => 'required',
             'jenis_kelamin' => 'required',
+            'usia' => 'required',
             'alamat' => 'required',
-            'karya_pengarang' => 'required',
         ],[
             'nama.required' => 'Bidang nama wajib diisi.',
             'jenis_kelamin.required' => 'Bidang jenis kelamin wajib diisi.',
+            'usia.required' => 'Bidang usia wajib diisi.',
             'alamat.required' => 'Bidang alamat wajib diisi.',
-            'karya_pengarang.required' => 'Bidang karya pengarang wajib diisi.',
         ]);
 
-       pengarang::create([
+         anggota::create([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'usia' => $request->usia,
             'alamat' => $request->alamat,
-            'karya_pengarang' => $request->karya_pengarang,
        ]);
 
-      return redirect('halaman-pengarang')->with('success', 'Data Berhasil Tersimpan!');
+      return redirect('halaman-anggota')->with('success', 'Data Berhasil Tersimpan!');
     }
 
     /**
@@ -65,9 +64,8 @@ class pengarangController extends Controller
      */
     public function edit(string $id)
     {
-        $edit = pengarang::findorfail($id);
-        return view('pengarang.edit-pengarang',compact('edit'));
-
+        $edit = anggota::findorfail($id);
+        return view('anggota.edit-anggota',compact('edit'));
     }
 
     /**
@@ -75,30 +73,30 @@ class pengarangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-         $this->validate($request,[
+        $this->validate($request,[
             'nama' => 'required',
             'jenis_kelamin' => 'required',
+            'usia' => 'required',
             'alamat' => 'required',
-            'karya_pengarang' => 'required',
         ],[
             'nama.required' => 'Bidang nama wajib diisi.',
             'jenis_kelamin.required' => 'Bidang jenis kelamin wajib diisi.',
+            'usia.required' => 'Bidang usia wajib diisi.',
             'alamat.required' => 'Bidang alamat wajib diisi.',
-            'karya_pengarang.required' => 'Bidang karya pengarang wajib diisi.',
         ]);
 
-        $ubah = pengarang::findorfail($id);
+         $ubah = anggota::findorfail($id);
 
-        $pengarang = [
-            'nama' => $request['nama'],
-            'jenis_kelamin' => $request['jenis_kelamin'],
-            'alamat' => $request['alamat'],
-            'karya_pengarang' => $request['karya_pengarang'],
+        $anggota = [
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'usia' => $request->usia,
+            'alamat' => $request->alamat,
         ];
 
-        $ubah->update($pengarang);
+        $ubah->update($anggota);
     
-        return redirect('halaman-pengarang')->with('success', 'Data Berhasil Update!');
+        return redirect('halaman-anggota')->with('success', 'Data Berhasil Update!');
     }
 
     /**
@@ -106,8 +104,8 @@ class pengarangController extends Controller
      */
     public function destroy(string $id)
     {
-        $hapus = pengarang::findorfail($id);
+        $hapus = anggota::findorfail($id);
         $hapus->delete();
-        return back() ;
+        return back();
     }
 }

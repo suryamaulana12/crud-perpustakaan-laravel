@@ -29,10 +29,35 @@ class penerbitController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required|min:5|max:50',
+            'terbitan_populer' => 'required|min:5|max:225',
+            'alamat' => 'required|min:5|max:225',
+            'no_telepon' => 'required|min:12|max:14|unique:penerbit,no_telepon'
+        ],[
+            'nama.required' => 'Bidang nama wajib diisi.',
+            'nama.min' => 'karakter harus lebih dari 5 karakter',
+            'nama.max' => 'karakter tidak boleh lebih dari 10 karakter',
+            
+            'terbitan_populer.required' => 'Bidang terbitan populer wajib diisi.',
+            'terbitan_populer.min' => 'karakter harus lebih dari 5 karakter',
+            'terbitan_populer.max' => 'karakter tidak boleh lebih dari 225 karakter',
+             
+            'alamat.required' => 'Bidang alamat wajib diisi.',
+            'alamat.min' => 'karakter harus lebih dari 5 karakter',
+            'alamat.max' => 'karakter tidak boleh lebih dari 225 karakter',
+
+            'no_telepon.required' => 'Bidang telepon wajib diisi.',
+            'no_telepon.min' => 'Bidang no telepon harus minimal 12 karakter.',
+            'no_telepon.max' => 'Bidang no telepon harus maksimal 14 karakter.',
+        ]);
+
         penerbit::create([
             'nama' => $request->nama,
             'terbitan_populer' => $request->terbitan_populer,
             'alamat' => $request->alamat,
+            'terbitan_populer' => $request->terbitan_populer,
+            'no_telepon' => $request->no_telepon,
        ]);
 
       return redirect('halaman-penerbit')->with('success', 'Data Berhasil Tersimpan!');
@@ -62,10 +87,34 @@ class penerbitController extends Controller
     {
         $ubah = penerbit::findorfail($id);
 
+        $this->validate($request,[
+            'nama' => 'required|min:5|max:50',
+            'terbitan_populer' => 'required|min:5|max:225',
+            'alamat' => 'required|min:5|max:225',
+            'no_telepon' => 'required|min:12|max:14'
+        ],[
+            'nama.required' => 'Bidang nama wajib diisi.',
+            'nama.min' => 'karakter harus lebih dari 5 karakter',
+            'nama.max' => 'karakter tidak boleh lebih dari 10 karakter',
+            
+            'terbitan_populer.required' => 'Bidang terbitan populer wajib diisi.',
+            'terbitan_populer.min' => 'karakter harus lebih dari 5 karakter',
+            'terbitan_populer.max' => 'karakter tidak boleh lebih dari 225 karakter',
+             
+            'alamat.required' => 'Bidang alamat wajib diisi.',
+            'alamat.min' => 'karakter harus lebih dari 5 karakter',
+            'alamat.max' => 'karakter tidak boleh lebih dari 225 karakter',
+
+            'no_telepon.required' => 'Bidang telepon wajib diisi.',
+            'no_telepon.min' => 'Bidang no telepon harus minimal 12 karakter.',
+            'no_telepon.max' => 'Bidang no telepon harus maksimal 14 karakter.'
+        ]);
+
         $pengarang = [
             'nama' => $request->nama,
             'terbitan_populer' => $request->terbitan_populer,
             'alamat' => $request->alamat,
+            'no_telepon' => $request->no_telepon,
         ];
 
         $ubah->update($pengarang);
@@ -78,8 +127,8 @@ class penerbitController extends Controller
      */
     public function destroy(string $id)
     {
-         $hapus = penerbit::findorfail($id);
+        $hapus = penerbit::findorfail($id);
         $hapus->delete();
-        return back()->with('success', 'Data Berhasil Terhapus!');
+        return back();
     }
 }
