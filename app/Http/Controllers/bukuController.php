@@ -96,6 +96,7 @@ class bukuController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // menambahkan validasi pada setiap inputan tabel
          $this->validate($request,[
             'judul' => 'required',
             'pengarang' => 'required',
