@@ -48,7 +48,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
-                            <label for="">Masukan Jenis Kelamin :</label>
+                            <label for="">Edit Jenis Kelamin :</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
                                     id="flexRadioDefault1" value="Laki-laki" value="<?= $edit['jenis_kelamin'] ?>"
@@ -80,18 +80,18 @@
                             @enderror
 
 
+                            <label for="">Edit Alamat Anggota :</label>
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat Penerbit"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat"
-                                    value="{{ $edit->alamat }}">
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample3" rows="3" name="alamat" style="width: 940px">{{ $edit->alamat }}</textarea>
+                                </div>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
 
-                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                            <button type="submit" class="btn btn-primary">Edit Data</button>
                             <a href="/halaman-anggota" class="btn btn-danger">Kembali</a>
                         </form>
 

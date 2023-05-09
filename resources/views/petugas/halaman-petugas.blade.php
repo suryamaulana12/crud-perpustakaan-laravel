@@ -44,7 +44,6 @@
                                 <td>No</td>
                                 <td>Nama</td>
                                 <td>Email</td>
-                                <td>Password</td>
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
@@ -53,7 +52,6 @@
                                     <td><?= $i ?></td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->password }}</td>
                                     <td>
                                         <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"><i
                                                 class="fas fa-trash"></i>

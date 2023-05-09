@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\buku;
 use App\Models\genre;
 use Illuminate\Http\Request;
 
@@ -85,7 +86,14 @@ class genreController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
+    {   
+        $buku = buku::where('genre_id', $id)->first();
+
+        $file = public_path('/template/img/').$buku->gambar;
+       if (file_exists($file)) {
+            @unlink($file);
+       }
+       
         $hapus = genre::findorfail($id);
         $hapus->delete();
         return back();

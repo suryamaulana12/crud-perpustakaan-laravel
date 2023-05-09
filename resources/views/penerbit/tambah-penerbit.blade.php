@@ -30,7 +30,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Tambah Penerbit Perpustakaan</h1>
-                    <hr style="margin-bottom: 20px">
+                    <hr style="margin-bottom: 50px">
                 </div>
 
                 <div class="row justify-content-center">
@@ -56,10 +56,12 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                            <label for="">Masukan Alamat Penerbit :</label>
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat Penerbit"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat">
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample3" placeholder="Silahkan masukan alamatnya..." rows="3"
+                                        name="alamat" style="width: 940px"></textarea>
+                                </div>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>

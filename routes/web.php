@@ -102,6 +102,11 @@ Route::post('/registerUser', [loginController::class, 'registerUser'])->name('re
 
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
+Route::get('/reset', [loginController::class, 'reset'])->name('reset');
+
+Route::post('/resetUser', [loginController::class, 'resetUser'])->name('resetUser');
+
+
 
 // controller petugas
 Route::get('/halaman-petugas','App\Http\Controllers\petugasController@index')->name('halaman-petugas');

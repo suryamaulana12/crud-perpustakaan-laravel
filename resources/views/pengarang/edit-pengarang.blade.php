@@ -29,7 +29,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Tambah Pengarang Perpustakaan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Edit Pengarang Perpustakaan</h1>
                     <hr style="margin-bottom: 20px">
                 </div>
 
@@ -71,11 +71,11 @@
                             @enderror
 
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="alamat"
-                                    value="{{ $edit->alamat }}">
+                            <label for="">Edit Alamat Pengarang :</label>
+                            <div class="input-group mb-4">
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample3" rows="3" name="alamat" style="width: 940px">{{ $edit->alamat }}</textarea>
+                                </div>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>

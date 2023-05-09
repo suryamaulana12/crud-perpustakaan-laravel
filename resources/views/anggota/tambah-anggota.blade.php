@@ -75,10 +75,9 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                            <label for="">Masukan Alamat Anggota :</label>
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat Anggota"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat">
+                                <textarea class="form-control" aria-label="With textarea" name="alamat" placeholder="Silahkan masukan alamatnya..."></textarea>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>

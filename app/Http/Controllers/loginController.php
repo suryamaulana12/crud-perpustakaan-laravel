@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\PasswordReset;
 
 class loginController extends Controller
 {
@@ -52,4 +53,32 @@ class loginController extends Controller
         return redirect('login')->with('success', 'Anda telah logout!');
     }
     
+    public function reset(){
+        return view('reset-password');
+    }
+
+    public function resetUser(Request $request){
+         $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'konfirmasi_password' => 'required|same:password',
+        ],[
+            'konfirmasi_password.same' => 'konfirmasi password tidak sama'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user) {
+            return back()->withErrors(['email' => 'Email tidak ditemukan']);
+        }
+
+        $user->password = bcrypt($request->password);
+        $user->setRememberToken(Str::random(60));
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        return redirect('/login')->with('success', 'Password anda berhasil direset');
+    
+    }
 }

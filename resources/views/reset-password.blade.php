@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Perpustakaan | Login</title>
+    <title>Perpustakaan | Reset Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -24,7 +24,7 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container" style="margin-top: 120px">
+    <div class="container" style="margin-top: 100px">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -34,9 +34,9 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Halaman Login</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Reset Password</h1>
                             </div>
-                            <form action="/loginUser" method="POST" class="user">
+                            <form action="/resetUser" method="POST" class="user">
                                 @csrf
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control form-control-user"
@@ -48,14 +48,33 @@
                                         id="exampleInputPassword" placeholder="Password" required>
                                 </div>
 
-                                <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="konfirmasi_password" placeholder="Konfirmasi Password"
+                                            name="konfirmasi_password" oninput="check(this)" required>
+                                        <span id="message"></span>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function check(input) {
+                                        if (input.value !== document.getElementById('password').value) {
+                                            input.setCustomValidity('konfirmasi password tidak valid');
+                                            document.getElementById('message').innerHTML = '';
+                                        } else {
+                                            input.setCustomValidity('');
+                                            document.getElementById('message').innerHTML = '';
+                                        }
+                                    }
+                                </script>
+
+                                <button class="btn btn-primary btn-user btn-block" type="submit">Reset
+                                    Password</button>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="/reset">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="/register">Create an Account!</a>
+                                <a class="small" href="/login">Sudah punya akun? login!</a>
                             </div>
                         </div>
 

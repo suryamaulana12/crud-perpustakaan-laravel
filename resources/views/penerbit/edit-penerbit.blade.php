@@ -58,11 +58,12 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                            <label for="">Edit Alamat Penerbit :</label>
                             <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat Penerbit"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="alamat"
-                                    value="{{ $edit->alamat }}" required>
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample3" placeholder="Silahkan masukan alamatnya..." rows="3"
+                                        name="alamat" style="width: 940px">{{ $edit->alamat }}</textarea>
+                                </div>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>

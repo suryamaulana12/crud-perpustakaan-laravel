@@ -68,10 +68,12 @@
                             @enderror
 
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Alamat"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="alamat">
+                            <label for="">Masukan Alamat Pengarang :</label>
+                            <div class="input-group mb-4">
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample3" placeholder="Silahkan masukan alamatnya..." rows="3"
+                                        name="alamat" style="width: 940px"></textarea>
+                                </div>
                             </div>
                             @error('alamat')
                                 <div class="alert alert-danger">{{ $message }}</div>
