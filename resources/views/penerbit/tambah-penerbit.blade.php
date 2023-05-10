@@ -38,19 +38,24 @@
 
                         <form action="{{ route('simpan-penerbit') }}" method="post">
                             {{ csrf_field() }}
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Penerbit"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama">
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Masukan Nama Penerbit :</label>
+                                <select class="form-control select" name="penerbit_id" id="penerbit_id">
+                                    <option disabled value>---Pilih Penerbit---</option>
+                                    @foreach ($buku as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('penerbit_id') == $item->id ? 'selected' : null }}>
+                                            {{ $item->penerbit }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Terbitan Populer"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="terbitan_populer">
+                                    aria-label="penerbit" aria-describedby="basic-addon1" name="terbitan_populer"
+                                    value="{{ old('terbitan_populer') }}">
                             </div>
                             @error('terbitan_populer')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -60,7 +65,7 @@
                             <div class="input-group mb-4">
                                 <div class="form-outline">
                                     <textarea class="form-control" id="textAreaExample3" placeholder="Silahkan masukan alamatnya..." rows="3"
-                                        name="alamat" style="width: 940px"></textarea>
+                                        name="alamat" style="width: 940px">{{ old('alamat') }}</textarea>
                                 </div>
                             </div>
                             @error('alamat')
@@ -70,7 +75,8 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                                 <input type="number" class="form-control" placeholder="Masukan Telepon Penerbit"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="no_telepon">
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="no_telepon"
+                                    value="{{ old('no_telepon') }}">
                             </div>
                             @error('no_telepon')
                                 <div class="alert alert-danger">{{ $message }}</div>

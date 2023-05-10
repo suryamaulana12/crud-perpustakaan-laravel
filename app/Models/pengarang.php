@@ -10,7 +10,11 @@ class pengarang extends Model
     protected $table = "pengarang";
     protected $primaryKey = "id";
     protected $filllable = [
-        'id', 'nama', 'jenis_kelamin', 'alamat', 'karya_id'
+        'id', 'pengarang_id', 'jenis_kelamin', 'alamat', 'karya_id'
     ];
     protected $guarded = [];
+
+     public function buku(){
+        return $this->belongsTo(buku::class, 'pengarang_id');
+     }
 }

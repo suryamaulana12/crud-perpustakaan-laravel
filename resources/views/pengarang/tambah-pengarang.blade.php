@@ -39,26 +39,31 @@
 
                         <form action="{{ route('simpan-pengarang') }}" method="post">
                             {{ csrf_field() }}
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama">
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Masukan Nama Pengarang :</label>
+                                <select class="form-control select" name="pengarang_id" id="pengarang_id">
+                                    <option disabled value>---Pilih Pengarang---</option>
+                                    @foreach ($buku as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('pengarang_id') == $item->id ? 'selected' : null }}>
+                                            {{ $item->pengarang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <label for="">Masukan Jenis Kelamin :</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault1" value="Laki-laki">
+                                    id="flexRadioDefault1" value="Laki-laki" value="{{ old('jenis_kelamin') }}"
+                                    {{ old('jenis_kelamin') == 'Laki-laki' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki-laki
                                 </label>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault12" value="Perempuan">
+                                    id="flexRadioDefault12" value="Perempuan" value="{{ old('jenis_kelamin') }}"
+                                    {{ old('jenis_kelamin') == 'Perempuan' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="flexRadioDefault12">
                                     Perempuan
                                 </label>
@@ -72,7 +77,7 @@
                             <div class="input-group mb-4">
                                 <div class="form-outline">
                                     <textarea class="form-control" id="textAreaExample3" placeholder="Silahkan masukan alamatnya..." rows="3"
-                                        name="alamat" style="width: 940px"></textarea>
+                                        name="alamat" style="width: 940px">{{ old('alamat') }}</textarea>
                                 </div>
                             </div>
                             @error('alamat')
@@ -82,7 +87,8 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Karya Pengarang"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="karya_pengarang">
+                                    aria-label="alamat" aria-describedby="basic-addon1" name="karya_pengarang"
+                                    value="{{ old('karya_pengarang') }}">
                             </div>
                             @error('karya_pengarang')
                                 <div class="alert alert-danger">{{ $message }}</div>

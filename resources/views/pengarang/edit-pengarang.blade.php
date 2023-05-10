@@ -39,15 +39,16 @@
 
                         <form action="{{ url('update-pengarang', $edit->id) }}" method="post">
                             {{ csrf_field() }}
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama"
-                                    value="{{ $edit->nama }}">
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Edit Pengarang Buku :</label>
+                                <select class="form-control select" name="pengarang_id" id="pengarang_id">
+                                    <option disabled value>---Pilih Pengarang---</option>
+                                    <option value="{{ $edit->pengarang_id }}">{{ $edit->buku->pengarang }}</option>
+                                    @foreach ($buku as $item)
+                                        <option value="{{ $item->id }}">{{ $item->pengarang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <label for="">Masukan Jenis Kelamin :</label>
                             <div class="form-check">

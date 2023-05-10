@@ -53,7 +53,7 @@
                             @foreach ($dtpenerbit as $item)
                                 <tbody class="table-striped">
                                     <td><?= $i ?></td>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->buku->penerbit }}</td>
                                     <td>{{ $item->terbitan_populer }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->no_telepon }}</td>

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\buku;
 use App\Models\penerbit;
+use Illuminate\Http\Request;
 
 class penerbitController extends Controller
 {
@@ -20,8 +21,9 @@ class penerbitController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('penerbit.tambah-penerbit');
+    {   
+        $buku = buku::all();
+        return view('penerbit.tambah-penerbit', compact('buku'));
     }
 
     /**
@@ -30,12 +32,10 @@ class penerbitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nama' => 'required|min:5|max:50',
             'terbitan_populer' => 'required|min:5|max:225',
             'alamat' => 'required|min:5|max:225',
             'no_telepon' => 'required|min:12|max:14|unique:penerbit,no_telepon'
         ],[
-            'nama.required' => 'Bidang nama wajib diisi.',
             'nama.min' => 'karakter harus lebih dari 5 karakter',
             'nama.max' => 'karakter tidak boleh lebih dari 10 karakter',
             
@@ -53,7 +53,7 @@ class penerbitController extends Controller
         ]);
 
         penerbit::create([
-            'nama' => $request->nama,
+            'penerbit_id' => $request->penerbit_id,
             'terbitan_populer' => $request->terbitan_populer,
             'alamat' => $request->alamat,
             'terbitan_populer' => $request->terbitan_populer,
@@ -76,8 +76,9 @@ class penerbitController extends Controller
      */
     public function edit(string $id)
     {
-        $edit = penerbit::findorfail($id);
-        return view('penerbit.edit-penerbit',compact('edit'));
+        $buku = buku::all();
+        $edit = penerbit::with('buku')->findorfail($id);
+        return view('penerbit.edit-penerbit',compact('edit', 'buku'));
     }
 
     /**
@@ -85,15 +86,16 @@ class penerbitController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $ubah = penerbit::findorfail($id);
 
         $this->validate($request,[
-            'nama' => 'required|min:5|max:50',
+            
             'terbitan_populer' => 'required|min:5|max:225',
             'alamat' => 'required|min:5|max:225',
             'no_telepon' => 'required|min:12|max:14'
         ],[
-            'nama.required' => 'Bidang nama wajib diisi.',
+            
             'nama.min' => 'karakter harus lebih dari 5 karakter',
             'nama.max' => 'karakter tidak boleh lebih dari 10 karakter',
             
@@ -111,7 +113,7 @@ class penerbitController extends Controller
         ]);
 
         $pengarang = [
-            'nama' => $request->nama,
+            'penerbit_id' => $request->penerbit_id,
             'terbitan_populer' => $request->terbitan_populer,
             'alamat' => $request->alamat,
             'no_telepon' => $request->no_telepon,

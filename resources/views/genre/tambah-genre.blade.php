@@ -41,7 +41,8 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Nama Genre"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="genre">
+                                    aria-label="judul" aria-describedby="basic-addon1" name="genre"
+                                    {{ old('genre') }}>
                             </div>
                             @error('genre')
                                 <div class="alert alert-danger">{{ $message }}</div>

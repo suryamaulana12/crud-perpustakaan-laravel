@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penerbit', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 100);
+            $table->bigInteger('penerbit_id')->index();
             $table->string('terbitan_populer', 100);
             $table->string('alamat', 100);
             $table->string('no_telepon', 14);

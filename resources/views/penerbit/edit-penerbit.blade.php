@@ -29,7 +29,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Tambah Penerbit Perpustakaan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Edit Penerbit Perpustakaan</h1>
                     <hr style="margin-bottom: 20px">
                 </div>
 
@@ -38,15 +38,16 @@
 
                         <form action="{{ route('update-penerbit', $edit->id) }}" method="post">
                             {{ csrf_field() }}
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Penerbit"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama"
-                                    value="{{ $edit->nama }}" required>
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Edit Penerbit Buku :</label>
+                                <select class="form-control select" name="penerbit_id" id="penerbit_id">
+                                    <option disabled value>---Pilih Penerbit---</option>
+                                    <option value="{{ $edit->penerbit_id }}">{{ $edit->buku->penerbit }}</option>
+                                    @foreach ($buku as $item)
+                                        <option value="{{ $item->id }}">{{ $item->penerbit }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>

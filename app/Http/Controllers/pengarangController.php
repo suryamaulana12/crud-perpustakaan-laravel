@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\buku;
 use App\Models\pengarang;
+use Illuminate\Http\Request;
 
 
 class pengarangController extends Controller
@@ -21,8 +22,9 @@ class pengarangController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('pengarang.tambah-pengarang');
+    {   
+        $buku = buku::all();
+        return view('pengarang.tambah-pengarang', compact('buku'));
     }
 
     /**
@@ -31,7 +33,7 @@ class pengarangController extends Controller
     public function store(Request $request)
     {
          $this->validate($request,[
-            'nama' => 'required',
+            
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'karya_pengarang' => 'required',
@@ -43,7 +45,7 @@ class pengarangController extends Controller
         ]);
 
        pengarang::create([
-            'nama' => $request->nama,
+            'pengarang_id' => $request->pengarang_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'karya_pengarang' => $request->karya_pengarang,
@@ -65,8 +67,9 @@ class pengarangController extends Controller
      */
     public function edit(string $id)
     {
-        $edit = pengarang::findorfail($id);
-        return view('pengarang.edit-pengarang',compact('edit'));
+        $buku = buku::all();
+        $edit = pengarang::with('buku')->findorfail($id);
+        return view('pengarang.edit-pengarang',compact('edit','buku'));
 
     }
 
@@ -76,7 +79,6 @@ class pengarangController extends Controller
     public function update(Request $request, string $id)
     {
          $this->validate($request,[
-            'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'karya_pengarang' => 'required',
@@ -90,7 +92,7 @@ class pengarangController extends Controller
         $ubah = pengarang::findorfail($id);
 
         $pengarang = [
-            'nama' => $request['nama'],
+            'pengarang_id' => $request['pengarang_id'],
             'jenis_kelamin' => $request['jenis_kelamin'],
             'alamat' => $request['alamat'],
             'karya_pengarang' => $request['karya_pengarang'],

@@ -42,7 +42,8 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Judul Buku"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="judul">
+                                    aria-label="judul" aria-describedby="basic-addon1" name="judul"
+                                    value="{{ old('judul') }}">
                             </div>
                             @error('judul')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -51,7 +52,8 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"
-                                    aria-label="pengarang" aria-describedby="basic-addon1" name="pengarang">
+                                    aria-label="pengarang" aria-describedby="basic-addon1" name="pengarang"
+                                    value="{{ old('pengarang') }}">
                             </div>
                             @error('pengarang')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -60,7 +62,8 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Penerbit"
-                                    aria-label="penerbit" aria-describedby="basic-addon1" name="penerbit">
+                                    aria-label="penerbit" aria-describedby="basic-addon1" name="penerbit"
+                                    value="{{ old('penerbit') }}">
                             </div>
                             @error('penerbit')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -71,14 +74,17 @@
                                 <select class="form-control select" name="genre_id" id="genre_id">
                                     <option disabled value>---Pilih Genre---</option>
                                     @foreach ($genre as $item)
-                                        <option value="{{ $item->id }}">{{ $item->genre }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ old('genre_id') == $item->id ? 'selected' : null }}>
+                                            {{ $item->genre }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="input-group mb-4">
                                 <input type="date" class="form-control" placeholder="Masukan link Buku"
-                                    aria-label="link" aria-describedby="basic-addon1" name="tahun_terbit">
+                                    aria-label="link" aria-describedby="basic-addon1" name="tahun_terbit"
+                                    value="{{ old('tahun_terbit') }}">
                             </div>
                             @error('tahun_terbit')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -86,7 +92,8 @@
 
                             <div class="mb-4">
                                 <label for="formFile" class="form-label">Masukan gambar Buku :</label>
-                                <input class="form-control" type="file" id="formFile" name="gambar">
+                                <input class="form-control" type="file" id="formFile" name="gambar"
+                                    value="{{ old('gambar') }}">
                             </div>
                             @error('gambar')
                                 <div class="alert alert-danger">{{ $message }}</div>

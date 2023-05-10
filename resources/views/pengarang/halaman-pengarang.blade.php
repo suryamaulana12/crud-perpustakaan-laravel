@@ -53,7 +53,7 @@
                             @foreach ($dtpengarang as $item)
                                 <tbody class="table-striped">
                                     <td><?= $i ?></td>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->buku->pengarang }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->karya_pengarang }}</td>
