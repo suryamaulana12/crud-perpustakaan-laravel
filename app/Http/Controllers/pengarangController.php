@@ -33,12 +33,12 @@ class pengarangController extends Controller
     public function store(Request $request)
     {
          $this->validate($request,[
-            
+            'pengarang_id' => 'unique:pengarang,pengarang_id',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'karya_pengarang' => 'required',
         ],[
-            'nama.required' => 'Bidang nama wajib diisi.',
+            'pengarang_id.unique' => 'pengarang sudah ditambahkan, coba edit karyanya aja',
             'jenis_kelamin.required' => 'Bidang jenis kelamin wajib diisi.',
             'alamat.required' => 'Bidang alamat wajib diisi.',
             'karya_pengarang.required' => 'Bidang karya pengarang wajib diisi.',
@@ -83,7 +83,6 @@ class pengarangController extends Controller
             'alamat' => 'required',
             'karya_pengarang' => 'required',
         ],[
-            'nama.required' => 'Bidang nama wajib diisi.',
             'jenis_kelamin.required' => 'Bidang jenis kelamin wajib diisi.',
             'alamat.required' => 'Bidang alamat wajib diisi.',
             'karya_pengarang.required' => 'Bidang karya pengarang wajib diisi.',

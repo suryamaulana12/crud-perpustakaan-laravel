@@ -32,12 +32,13 @@ class penerbitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+            'penerbit_id' => 'unique:penerbit,penerbit_id',
             'terbitan_populer' => 'required|min:5|max:225',
             'alamat' => 'required|min:5|max:225',
             'no_telepon' => 'required|min:12|max:14|unique:penerbit,no_telepon'
         ],[
-            'nama.min' => 'karakter harus lebih dari 5 karakter',
-            'nama.max' => 'karakter tidak boleh lebih dari 10 karakter',
+
+            'penerbit_id.unique' => 'pengarang sudah ditambahkan, coba edit karyanya aja',
             
             'terbitan_populer.required' => 'Bidang terbitan populer wajib diisi.',
             'terbitan_populer.min' => 'karakter harus lebih dari 5 karakter',

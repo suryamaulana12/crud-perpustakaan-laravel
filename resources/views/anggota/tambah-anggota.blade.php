@@ -40,52 +40,66 @@
                             {{ csrf_field() }}
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Masukan Nama Anggota"
-                                    aria-label="judul" aria-describedby="basic-addon1" name="nama"
-                                    value="{{ old('nama') }}">
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                    placeholder="Masukan Nama Anggota" aria-label="judul"
+                                    aria-describedby="basic-addon1" name="nama" value="{{ old('nama') }}">
+                                @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
 
                             <label for="">Masukan Jenis Kelamin :</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault1" value="Laki-laki" value="{{ old('jenis_kelamin') }}"
+                                <input class="form-check-input @error('jenis_kelamin') is-invalid @enderror"
+                                    type="radio" name="jenis_kelamin" id="flexRadioDefault1" value="Laki-laki"
+                                    value="{{ old('jenis_kelamin') }}"
                                     {{ old('jenis_kelamin') == 'Laki-laki' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki-laki
                                 </label>
                             </div>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                    id="flexRadioDefault12" value="Perempuan" value="{{ old('jenis_kelamin') }}"
+                                <input class="form-check-input @error('jenis_kelamin') is-invalid @enderror"
+                                    type="radio" name="jenis_kelamin" id="flexRadioDefault12" value="Perempuan"
+                                    value="{{ old('jenis_kelamin') }}"
                                     {{ old('jenis_kelamin') == 'Perempuan' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="flexRadioDefault12">
                                     Perempuan
                                 </label>
+                                @error('jenis_kelamin')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('jenis_kelamin')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
 
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                                <input type="number" class="form-control" placeholder="Masukan Usia Anggota"
-                                    aria-label="alamat" aria-describedby="basic-addon1" name="usia"
-                                    value="{{ old('usia') }}">
+                                <input type="number" class="form-control @error('usia') is-invalid @enderror"
+                                    placeholder="Masukan Usia Anggota" aria-label="alamat"
+                                    aria-describedby="basic-addon1" name="usia" value="{{ old('usia') }}">
+                                @error('usia')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('usia')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <label for="">Masukan Alamat Anggota :</label>
                             <div class="input-group mb-4">
-                                <textarea class="form-control" aria-label="With textarea" name="alamat" placeholder="Silahkan masukan alamatnya...">{{ old('alamat') }}</textarea>
+                                <textarea class="form-control @error('alamat') is-invalid @enderror" aria-label="With textarea" name="alamat"
+                                    placeholder="Silahkan masukan alamatnya...">{{ old('alamat') }}</textarea>
+                                @error('alamat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('alamat')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
 
 
                             <button type="submit" class="btn btn-primary">Tambah Data</button>

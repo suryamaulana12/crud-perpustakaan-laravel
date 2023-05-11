@@ -40,7 +40,7 @@
                         <form action="{{ route('simpan-pengarang') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group mb-3">
-                                <label for="formFile" class="form-label">Masukan Nama Pengarang :</label>
+                                <label for="formFile" class="form-label">Pilih Nama Pengarang :</label>
                                 <select class="form-control select" name="pengarang_id" id="pengarang_id">
                                     <option disabled value>---Pilih Pengarang---</option>
                                     @foreach ($buku as $item)
@@ -50,6 +50,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @error('pengarang_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <label for="">Masukan Jenis Kelamin :</label>
                             <div class="form-check">

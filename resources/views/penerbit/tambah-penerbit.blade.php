@@ -39,7 +39,7 @@
                         <form action="{{ route('simpan-penerbit') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group mb-3">
-                                <label for="formFile" class="form-label">Masukan Nama Penerbit :</label>
+                                <label for="formFile" class="form-label">Pilih Nama Penerbit :</label>
                                 <select class="form-control select" name="penerbit_id" id="penerbit_id">
                                     <option disabled value>---Pilih Penerbit---</option>
                                     @foreach ($buku as $item)
@@ -49,7 +49,9 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            @error('penerbit_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-landmark"></i></span>
