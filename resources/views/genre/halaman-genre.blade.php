@@ -36,32 +36,54 @@
 
                 <div class="row">
                     <div class="card-body">
-                        <a href="{{ route('tambah-genre') }}"><button type="button" class="btn btn-success mb-3 ml-1">+
+                        <a href="{{ route('tambah-genre') }}"><button type="button" class="btn btn-success  ml-1"
+                                style="margin-bottom: -57px">+
                                 Tambah Genre</button></a>
 
-                        <table class="table table-hover col-12 text-center justify-content-center">
-                            <thead class="" style="font-weight: bold">
-                                <td>No</td>
-                                <td>Genre</td>
-                                <td>Aksi</td>
+                        <div class="row justify-content-end mr-2 mb-3">
+                            <form action="/halaman-genre" method="GET"
+                                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="search" class="form-control bg-gray border-0 small"
+                                        placeholder="Cari yang anda inginkan!" name="search" aria-label="Search"
+                                        aria-describedby="basic-addon2" autofocus>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <table class="table table-hover text-center justify-content-center">
+                            <thead class="justif-content-end" style="font-weight: bold">
+                                <tr>
+                                    <td>No</td>
+                                    <td>Genre</td>
+                                    <td>Aksi</td>
+                                </tr>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($dtgenre as $item)
+                            @foreach ($dtgenre as $index => $item)
                                 <tbody class="table-striped">
-                                    <td><?= $i ?></td>
-                                    <td>{{ $item->genre }}</td>
-                                    <td>
-                                        <a href="{{ url('edit-genre', $item->id) }}"><button type="submit"
-                                                class="btn btn-warning" style="margin-right: 5px;"><i
-                                                    class="fas fa-pen"></i></button></a>
-                                        <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"><i
-                                                class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    <tr>
+                                        <td>{{ $index + $dtgenre->firstItem() }}</td>
+                                        <td>{{ $item->genre }}</td>
+                                        <td>
+                                            <a href="{{ url('edit-genre', $item->id) }}"><button type="submit"
+                                                    class="btn btn-warning" style="margin-right: 5px;"><i
+                                                        class="fas fa-pen"></i></button></a>
+                                            <a href="#" class="btn btn-danger delete"
+                                                data-id="{{ $item->id }}"><i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                                 <?php $i++; ?>
                             @endforeach
                         </table>
+                        {{ $dtgenre->links() }}
 
                         <script src="https://code.jquery.com/jquery-3.6.4.slim.js"
                             integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>

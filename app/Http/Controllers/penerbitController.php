@@ -11,9 +11,16 @@ class penerbitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dtpenerbit = penerbit::all();
+         if ($request->has('search')) {
+            $dtpenerbit = penerbit::with('buku')->where('terbitan_populer','LIKE','%' .$request->search.'%')
+            ->orWhere('no_telepon','LIKE','%' .$request->search.'%')
+            ->orWhere('alamat','LIKE','%' .$request->search.'%')
+            ->paginate(4);
+        }else {
+            $dtpenerbit = penerbit::with('buku')->paginate(4);
+        }
         return view('penerbit.halaman-penerbit', compact('dtpenerbit'));
     }
 

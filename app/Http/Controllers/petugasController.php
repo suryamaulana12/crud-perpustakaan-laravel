@@ -10,9 +10,14 @@ class petugasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if ($request->has('search')) {
+
+            $users = User::where('name','LIKE','%' .$request->search.'%')->paginate(4);
+        }else {
+            $users = User::paginate(4);
+        }
         return view('petugas.halaman-petugas', compact('users'));
     }
 

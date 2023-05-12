@@ -11,9 +11,13 @@ class genreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dtgenre = genre::all();
+         if ($request->has('search')) {
+            $dtgenre = genre::with('buku')->where('genre','LIKE','%' .$request->search.'%')->paginate(4);
+        }else {
+            $dtgenre = genre::with('buku')->paginate(4);
+        }
         return view('genre.halaman-genre', compact('dtgenre'));
     }
 

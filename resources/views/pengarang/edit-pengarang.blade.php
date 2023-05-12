@@ -39,6 +39,7 @@
 
                         <form action="{{ url('update-pengarang', $edit->id) }}" method="post">
                             {{ csrf_field() }}
+                            @method('PUT')
                             <div class="form-group mb-3">
                                 <label for="formFile" class="form-label">Edit Pengarang Buku :</label>
                                 <select class="form-control select" name="pengarang_id" id="pengarang_id">

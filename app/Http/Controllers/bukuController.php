@@ -13,9 +13,14 @@ class bukuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $buku = buku::with('genre')->paginate(10);
+        if ($request->has('search')) {
+            $buku = buku::with('genre')->where('judul','LIKE','%' .$request->search.'%')->paginate(6);
+        }else {
+            $buku = buku::with('genre')->paginate(3);
+        }
+
         return view('buku.halaman-buku', compact('buku'));
 
     }

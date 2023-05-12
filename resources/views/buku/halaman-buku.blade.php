@@ -30,14 +30,31 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Data Buku Perpustakaan</h1>
-                    <hr style="margin-bottom: 10px">
+                    <hr style="margin-bottom: 5px">
                 </div>
 
 
                 <div class="row">
                     <div class="card-body">
-                        <a href="{{ route('tambah-buku') }}"><button type="button" class="btn btn-success mb-3 ml-1">+
+                        <a href="{{ route('tambah-buku') }}"><button type="button" class="btn btn-success  ml-1"
+                                style="margin-bottom: -57px">+
                                 TambahBuku</button></a>
+
+                        <div class="row justify-content-end mr-2 mb-3">
+                            <form action="/halaman-buku" method="GET"
+                                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="search" class="form-control bg-gray border-0 small"
+                                        placeholder="Cari yang anda inginkan!" name="search" aria-label="Search"
+                                        aria-describedby="basic-addon2" autofocus>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
                         <table class="table table-hover col-12 text-center justify-content-center">
                             <thead class="" style="font-weight: bold">
@@ -51,9 +68,9 @@
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($buku as $item)
+                            @foreach ($buku as $index => $item)
                                 <tbody class="table-striped">
-                                    <td><?= $i ?></td>
+                                    <td>{{ $index + $buku->firstItem() }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td>{{ $item->pengarang }}</td>
                                     <td>{{ $item->penerbit }}</td>
@@ -73,6 +90,8 @@
                                 <?php $i++; ?>
                             @endforeach
                         </table>
+                        {{ $buku->links() }}
+
 
                         {{-- menambahkan konfirmasi delete pakai sweet alert --}}
                         <script src="https://code.jquery.com/jquery-3.6.4.slim.js"

@@ -38,6 +38,7 @@
 
                         <form action="{{ route('update-penerbit', $edit->id) }}" method="post">
                             {{ csrf_field() }}
+                            @method('PUT')
                             <div class="form-group mb-3">
                                 <label for="formFile" class="form-label">Edit Penerbit Buku :</label>
                                 <select class="form-control select" name="penerbit_id" id="penerbit_id">

@@ -190,7 +190,7 @@
     @include('template.logout')
 
     @include('template.script')
-
+    @include('sweetalert::alert')
 </body>
 
 </html>

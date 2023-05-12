@@ -29,12 +29,18 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Daftar Halaman:</h6>
-                <a class="collapse-item" href="{{ route('halaman-buku') }}">Data Buku</a>
-                <a class="collapse-item" href="{{ route('halaman-anggota') }}">Data Anggota</a>
-                <a class="collapse-item mb-1" href="{{ route('halaman-petugas') }}">Data Petugas</a>
-                <a class="collapse-item mb-1" href="{{ route('halaman-pengarang') }}">Data Pengarang</a>
-                <a class="collapse-item mt-1" href="{{ route('halaman-penerbit') }}">Data Penerbit</a>
-                <a class="collapse-item mt-1" href="{{ route('halaman-genre') }}">Data Genre</a>
+                <a class="collapse-item {{ request()->is('halaman-buku') ? 'active' : '' }}"
+                    href="{{ route('halaman-buku') }}">Data Buku</a>
+                <a class="collapse-item {{ request()->is('halaman-anggota') ? 'active' : '' }}"
+                    href="{{ route('halaman-anggota') }}">Data Anggota</a>
+                <a class="collapse-item mb-1 {{ request()->is('halaman-petugas') ? 'active' : '' }}"
+                    href="{{ route('halaman-petugas') }}">Data Petugas</a>
+                <a class="collapse-item mb-1 {{ request()->is('halaman-pengarang') ? 'active' : '' }}"
+                    href="{{ route('halaman-pengarang') }}">Data Pengarang</a>
+                <a class="collapse-item mt-1 {{ request()->is('halaman-penerbit') ? 'active' : '' }}"
+                    href="{{ route('halaman-penerbit') }}">Data Penerbit</a>
+                <a class="collapse-item mt-1 {{ request()->is('halaman-genre') ? 'active' : '' }}"
+                    href="{{ route('halaman-genre') }}">Data Genre</a>
             </div>
         </div>
     </li>

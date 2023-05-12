@@ -38,6 +38,7 @@
 
                         <form action="{{ route('update-anggota', $edit->id) }}" method="post">
                             {{ csrf_field() }}
+                            @method('PUT')
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Nama Pengarang"

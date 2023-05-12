@@ -39,6 +39,7 @@
 
                         <form action="{{ url('update-buku', $edit->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            @method('PUT')
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-book"></i></span>
                                 <input type="text" class="form-control" placeholder="Masukan Judul Buku"

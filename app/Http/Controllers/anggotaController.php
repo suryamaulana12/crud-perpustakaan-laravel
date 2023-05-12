@@ -10,9 +10,14 @@ class anggotaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-         $dtanggota = anggota::all();
+    public function index(Request $request)
+    { 
+        if ($request->has('search')) {
+
+            $dtanggota = anggota::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+        }else {
+            $dtanggota = anggota::paginate(4);
+        }
         return view('anggota.halaman-anggota', compact('dtanggota'));
     }
 

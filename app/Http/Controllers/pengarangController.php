@@ -12,9 +12,14 @@ class pengarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       $dtpengarang = pengarang::all();
+        if ($request->has('search')) {
+            $dtpengarang = pengarang::with('buku')->where('alamat','LIKE','%' .$request->search.'%')
+            ->orWhere('karya_pengarang','LIKE','%' .$request->search.'%')->paginate(4);
+        }else {
+            $dtpengarang = pengarang::with('buku')->paginate(4);
+        }
         return view('pengarang.halaman-pengarang', compact('dtpengarang'));
     }
 

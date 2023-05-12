@@ -36,8 +36,25 @@
 
                 <div class="row">
                     <div class="card-body">
-                        <a href="/register"><button type="button" class="btn btn-success mb-3 ml-1">+
+                        <a href="/register"><button type="button" class="btn btn-success ml-1"
+                                style="margin-bottom: -57px">+
                                 Tambah Petugas</button></a>
+
+                        <div class="row justify-content-end mr-2 mb-3">
+                            <form action="/halaman-petugas" method="GET"
+                                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="search" class="form-control bg-gray border-0 small"
+                                        placeholder="Cari yang anda inginkan!" name="search" aria-label="Search"
+                                        aria-describedby="basic-addon2" autofocus>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
                         <table class="table table-hover col-12 text-center justify-content-center">
                             <thead class="" style="font-weight: bold">
@@ -47,9 +64,9 @@
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($users as $item)
+                            @foreach ($users as $index => $item)
                                 <tbody class="table-striped">
-                                    <td><?= $i ?></td>
+                                    <td>{{ $index + $users->firstItem() }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
@@ -61,6 +78,7 @@
                                 <?php $i++; ?>
                             @endforeach
                         </table>
+                        {{ $users->links() }}
 
                         <script src="https://code.jquery.com/jquery-3.6.4.slim.js"
                             integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
