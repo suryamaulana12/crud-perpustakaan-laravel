@@ -91,15 +91,19 @@ class genreController extends Controller
      */
     public function destroy(string $id)
     {   
-        $buku = buku::where('genre_id', $id)->first();
-
-        $file = public_path('/template/img/').$buku->gambar;
-       if (file_exists($file)) {
-            @unlink($file);
-       }
-       
         $hapus = genre::findorfail($id);
-        $hapus->delete();
-        return back();
+
+        $count_genre = buku::where('genre_id', $id)->count();
+        if ($count_genre > 0) {
+        return back()->with('error', 'Data masih digunakan di tabel Buku!');
+    }
+    $hapus->delete();
+    $lastPage = ceil(genre::count() / 4);
+
+    if (request()->input('page') == $lastPage && genre::count() % 4 == 1) {
+        return redirect()->route('halaman-genre')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-genre')->with('success', 'Data berhasil dihapus!');
+    }
     }
 }

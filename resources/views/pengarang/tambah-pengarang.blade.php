@@ -40,16 +40,17 @@
                         <form action="{{ route('simpan-pengarang') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group mb-3">
-                                <label for="formFile" class="form-label">Pilih Nama Pengarang :</label>
+                                <label for="formFile" class="form-label">Pilih Nama Pengarang:</label>
                                 <select class="form-control select" name="pengarang_id" id="pengarang_id">
                                     <option disabled value>---Pilih Pengarang---</option>
-                                    @foreach ($buku as $item)
+                                    @foreach ($buku->unique('pengarang') as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old('pengarang_id') == $item->id ? 'selected' : null }}>
                                             {{ $item->pengarang }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
                             @error('pengarang_id')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

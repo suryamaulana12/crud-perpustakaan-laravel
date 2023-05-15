@@ -45,8 +45,10 @@
                                 <select class="form-control select" name="pengarang_id" id="pengarang_id">
                                     <option disabled value>---Pilih Pengarang---</option>
                                     <option value="{{ $edit->pengarang_id }}">{{ $edit->buku->pengarang }}</option>
-                                    @foreach ($buku as $item)
-                                        <option value="{{ $item->id }}">{{ $item->pengarang }}</option>
+                                    @foreach ($buku->unique('pengarang') as $item)
+                                        <option value="{{ $item->id }}" disabled
+                                            {{ $edit->pengarang_id == $item->id ? 'selected' : null }}>
+                                            {{ $item->pengarang }}</option>
                                     @endforeach
                                 </select>
                             </div>

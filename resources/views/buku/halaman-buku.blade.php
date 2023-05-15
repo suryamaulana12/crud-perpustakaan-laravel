@@ -4,7 +4,8 @@
 <head>
     <title>Perpustakaan | Halaman Buku</title>
     @include('template.head')
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -45,7 +46,8 @@
                                 class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                 <div class="input-group">
                                     <input type="search" class="form-control bg-gray border-0 small"
-                                        placeholder="Cari yang anda inginkan!" name="search" aria-label="Search"
+                                        placeholder="Cari yang anda inginkan!" name="search"
+                                        value="{{ request('search') }}" aria-label="Search"
                                         aria-describedby="basic-addon2" autofocus>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
@@ -68,56 +70,66 @@
                                 <td>Aksi</td>
                             </thead>
                             <?php $i = 1; ?>
-                            @foreach ($buku as $index => $item)
-                                <tbody class="table-striped">
-                                    <td>{{ $index + $buku->firstItem() }}</td>
-                                    <td>{{ $item->judul }}</td>
-                                    <td>{{ $item->pengarang }}</td>
-                                    <td>{{ $item->penerbit }}</td>
-                                    <td>{{ $item->genre->genre }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($item->tahun_terbit)) }}</td>
-                                    <td><img src="{{ asset('template/img/' . $item->gambar) }}" width="30%"
-                                            height="30%" alt=""></td>
-                                    <td>
-                                        <a href="{{ url('edit-buku', $item->id) }}"><button type="submit"
-                                                class="btn btn-warning" style="margin-right: 5px;"><i
-                                                    class="fas fa-pen"></i></button></a>
-                                        <a href="#" class="btn btn-danger delete" data-id="{{ $item->id }}"><i
-                                                class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tbody>
-                                <?php $i++; ?>
-                            @endforeach
+                            @if (count($buku) != 0)
+                                @foreach ($buku as $index => $item)
+                                    <tbody class="table-striped">
+                                        <td>{{ $index + $buku->firstItem() }}</td>
+                                        <td>{{ $item->judul }}</td>
+                                        <td>{{ $item->pengarang }}</td>
+                                        <td>{{ $item->penerbit }}</td>
+                                        <td>{{ $item->genre->genre }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->tahun_terbit)) }}</td>
+                                        <td><img src="{{ asset('template/img/' . $item->gambar) }}" width="25%"
+                                                height="25%" alt="">
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <a href="{{ url('edit-buku', $item->id) }}"><button type="submit"
+                                                    class="btn btn-warning"style="margin-right: 5px"><i
+                                                        class="fas fa-pen"></i></button></a>
+                                            <form action="/delete-buku/{{ $item->id }}" method="POST"
+                                                class="delete-form" id="delete-form-{{ $item->id }}">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="confirmDelete(event, {{ $item->id }})">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tbody>
+                                    <?php $i++; ?>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="8">Tidak ada data</td>
+                                </tr>
+                            @endif
                         </table>
-                        {{ $buku->links() }}
-
+                        {{ $buku->appends(['search' => request('search')])->links() }}
 
                         {{-- menambahkan konfirmasi delete pakai sweet alert --}}
-                        <script src="https://code.jquery.com/jquery-3.6.4.slim.js"
-                            integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
                         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                         <script>
-                            $('.delete').click(function() {
-                                var anggotaid = $(this).attr('data-id');
-                                swal({
-                                        title: "Apakah anda yakin?",
-                                        text: "Data ini ingin dihapus!",
-                                        icon: "warning",
-                                        buttons: true,
-                                        dangerMode: true,
-                                    })
-                                    .then((willDelete) => {
-                                        if (willDelete) {
-                                            window.location = "/delete-buku/" + anggotaid + ""
-                                            swal("Data berhasil dihapus!", {
-                                                icon: "success",
-                                            });
-                                        } else {
-                                            swal("Data tidak jadi dihapus!");
-                                        }
-                                    });
-                            });
+                            function confirmDelete(event, id) {
+                                event.preventDefault(); // Menghentikan submit form
+
+                                Swal.fire({
+                                    title: 'Yakin ingin menghapus data ini?',
+                                    text: 'Data yang dihapus tidak dapat dikembalikan!',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Ya, hapus!',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Kode untuk melakukan penghapusan data di sini
+                                        document.getElementById(`delete-form-${id}`)
+                                            .submit(); // Melanjutkan submit form setelah konfirmasi
+                                    }
+                                });
+                            }
                         </script>
                     </div>
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\buku;
 use App\Models\genre;
+use App\Models\penerbit;
+use App\Models\pengarang;
 use Illuminate\Support\Facades\File;
 
 
@@ -16,10 +18,16 @@ class bukuController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $buku = buku::with('genre')->where('judul','LIKE','%' .$request->search.'%')->paginate(6);
-        }else {
-            $buku = buku::with('genre')->paginate(3);
+            $kolom = 'genre';
+            $keyword = $request->search;
+            $genre = buku::whereHas('genre', function($query) use ($keyword) {
+                $query->where('genre', 'LIKE', '%'.$keyword.'%');
+            })->orWhere('pengarang','LIKE','%' .$keyword.'%')->orWhere('penerbit','LIKE','%' .$keyword.'%')->orWhere('judul','LIKE','%' .$keyword.'%')->paginate(3);
+            $genre->appends(['search', $keyword]);
+            return view('buku.halaman-buku', ['buku' => $genre]);
+            
         }
+         $buku = buku::with('genre')->paginate(3);
 
         return view('buku.halaman-buku', compact('buku'));
 
@@ -149,15 +157,31 @@ class bukuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    {
-        $hapus = buku::findorfail($id);
+ public function destroy($id)
+{
+    $hapus = buku::findorfail($id);
 
-        $file = public_path('/template/img/').$hapus->gambar;
-       if (file_exists($file)) {
-            @unlink($file);
-       }
-        $hapus->delete();
-        return back();
+    $count_penerbit = penerbit::where('penerbit_id', $id)->count();
+    $count_pengarang = pengarang::where('pengarang_id', $id)->count();
+
+    if ($count_penerbit > 0 || $count_pengarang > 0) {
+        return back()->with('error', 'Data masih digunakan di tabel Penerbit atau Pengarang!');
     }
+
+    $file = public_path('/template/img/').$hapus->gambar;
+    if (file_exists($file)) {
+        @unlink($file);
+    }
+
+    $hapus->delete();
+
+    $lastPage = ceil(buku::count() / 3);
+
+    if (request()->input('page') == $lastPage && buku::count() % 3 == 1) {
+        return redirect()->route('halaman-buku')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-buku')->with('success', 'Data berhasil dihapus!');
+    }
+}
+
 }

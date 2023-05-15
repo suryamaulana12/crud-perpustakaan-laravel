@@ -35,12 +35,13 @@ class anggotaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nama' => 'required',
+            'nama' => 'required|regex:/^[a-zA-Z\s]*$/',
             'jenis_kelamin' => 'required',
             'usia' => 'required',
             'alamat' => 'required',
         ],[
             'nama.required' => 'Bidang nama wajib diisi.',
+            'nama.regex' => 'Format bidang nama tidak valid.',
             'jenis_kelamin.required' => 'Bidang jenis kelamin wajib diisi.',
             'usia.required' => 'Bidang usia wajib diisi.',
             'alamat.required' => 'Bidang alamat wajib diisi.',
@@ -111,6 +112,11 @@ class anggotaController extends Controller
     {
         $hapus = anggota::findorfail($id);
         $hapus->delete();
-        return back();
+        $lastPage = ceil(anggota::count() / 4);
+       if (request()->input('page') == $lastPage && anggota::count() % 4 == 1) {
+        return redirect()->route('halaman-anggota')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-anggota')->with('success', 'Data berhasil dihapus!');
+    }
     }
 }

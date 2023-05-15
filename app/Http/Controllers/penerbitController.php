@@ -14,13 +14,15 @@ class penerbitController extends Controller
     public function index(Request $request)
     {
          if ($request->has('search')) {
-            $dtpenerbit = penerbit::with('buku')->where('terbitan_populer','LIKE','%' .$request->search.'%')
-            ->orWhere('no_telepon','LIKE','%' .$request->search.'%')
-            ->orWhere('alamat','LIKE','%' .$request->search.'%')
-            ->paginate(4);
-        }else {
-            $dtpenerbit = penerbit::with('buku')->paginate(4);
+            $kolom = 'penerbit';
+            $keyword = $request->search;
+            $penerbit = penerbit::whereHas('buku', function($query) use ($keyword) {
+                $query->where('penerbit', 'LIKE', '%'.$keyword.'%');
+            })->orWhere('alamat','LIKE','%' .$keyword.'%')->orWhere('no_telepon','LIKE','%' .$keyword.'%')->orWhere('terbitan_populer','LIKE','%' .$keyword.'%')->paginate(4);
+            $penerbit->appends(['search', $keyword]);
+            return view('penerbit.halaman-penerbit', ['dtpenerbit' => $penerbit]);
         }
+        $dtpenerbit = penerbit::with('buku')->paginate(4);
         return view('penerbit.halaman-penerbit', compact('dtpenerbit'));
     }
 
@@ -139,6 +141,11 @@ class penerbitController extends Controller
     {
         $hapus = penerbit::findorfail($id);
         $hapus->delete();
-        return back();
+        $lastPage = ceil(penerbit::count() / 4);
+       if (request()->input('page') == $lastPage && penerbit::count() % 4 == 1) {
+        return redirect()->route('halaman-penerbit')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-penerbit')->with('success', 'Data berhasil dihapus!');
+    }
     }
 }

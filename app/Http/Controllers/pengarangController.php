@@ -15,11 +15,15 @@ class pengarangController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $dtpengarang = pengarang::with('buku')->where('alamat','LIKE','%' .$request->search.'%')
-            ->orWhere('karya_pengarang','LIKE','%' .$request->search.'%')->paginate(4);
-        }else {
-            $dtpengarang = pengarang::with('buku')->paginate(4);
+            $kolom = 'pengarang';
+            $keyword = $request->search;
+            $pengarang = pengarang::whereHas('buku', function($query) use ($keyword) {
+                $query->where('pengarang', 'LIKE', '%'.$keyword.'%');
+            })->orWhere('alamat','LIKE','%' .$keyword.'%')->orWhere('karya_Pengarang','LIKE','%' .$keyword.'%')->paginate(4);
+            $pengarang->appends(['search', $keyword]);
+            return view('pengarang.halaman-pengarang', ['dtpengarang' => $pengarang]);
         }
+        $dtpengarang = pengarang::with('buku')->paginate(4);
         return view('pengarang.halaman-pengarang', compact('dtpengarang'));
     }
 
@@ -114,6 +118,11 @@ class pengarangController extends Controller
     {
         $hapus = pengarang::findorfail($id);
         $hapus->delete();
-        return back() ;
+        $lastPage = ceil(pengarang::count() / 4);
+       if (request()->input('page') == $lastPage && pengarang::count() % 4 == 1) {
+        return redirect()->route('halaman-pengarang')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-pengarang')->with('success', 'Data berhasil dihapus!');
+    }
     }
 }

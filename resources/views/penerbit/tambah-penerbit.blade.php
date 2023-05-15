@@ -39,16 +39,17 @@
                         <form action="{{ route('simpan-penerbit') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group mb-3">
-                                <label for="formFile" class="form-label">Pilih Nama Penerbit :</label>
+                                <label for="formFile" class="form-label">Pilih Nama Penerbit:</label>
                                 <select class="form-control select" name="penerbit_id" id="penerbit_id">
                                     <option disabled value>---Pilih Penerbit---</option>
-                                    @foreach ($buku as $item)
+                                    @foreach ($buku->unique('penerbit') as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old('penerbit_id') == $item->id ? 'selected' : null }}>
                                             {{ $item->penerbit }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
                             @error('penerbit_id')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

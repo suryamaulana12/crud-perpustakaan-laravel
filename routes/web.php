@@ -37,7 +37,7 @@ Route::get('/edit-buku/{id}','App\Http\Controllers\bukuController@edit')->name('
 
 Route::put('/update-buku/{id}','App\Http\Controllers\bukuController@update')->name('update-buku');
 
-Route::get('/delete-buku/{id}','App\Http\Controllers\bukuController@destroy')->name('delete-buku');
+Route::delete('/delete-buku/{id}','App\Http\Controllers\bukuController@destroy')->name('delete-buku');
 
 
 // Controller pengarang
@@ -50,7 +50,7 @@ Route::get('/edit-pengarang/{id}','App\Http\Controllers\pengarangController@edit
 
 Route::put('/update-pengarang/{id}','App\Http\Controllers\pengarangController@update')->name('update-pengarang');
 
-Route::get('/delete-pengarang/{id}','App\Http\Controllers\pengarangController@destroy')->name('delete-pengarang');
+Route::delete('/delete-pengarang/{id}','App\Http\Controllers\pengarangController@destroy')->name('delete-pengarang');
 
 
 // controller karya pengarang
@@ -75,7 +75,7 @@ Route::get('/edit-penerbit/{id}','App\Http\Controllers\penerbitController@edit')
 
 Route::put('/update-penerbit/{id}','App\Http\Controllers\penerbitController@update')->name('update-penerbit');
 
-Route::get('/delete-penerbit/{id}','App\Http\Controllers\penerbitController@destroy')->name('delete-penerbit');
+Route::delete('/delete-penerbit/{id}','App\Http\Controllers\penerbitController@destroy')->name('delete-penerbit');
 
 
 // controller anggota
@@ -114,7 +114,7 @@ Route::post('/resetUser', [loginController::class, 'resetUser'])->name('resetUse
 
 // controller petugas
 
-Route::get('/delete-petugas/{id}','App\Http\Controllers\petugasController@destroy')->name('delete-petugas');
+Route::delete('/delete-petugas/{id}','App\Http\Controllers\petugasController@destroy')->name('delete-petugas');
 
 
 
@@ -128,7 +128,7 @@ Route::get('/edit-genre/{id}','App\Http\Controllers\genreController@edit')->name
 
 Route::put('/update-genre/{id}','App\Http\Controllers\genreController@update')->name('update-genre');
 
-Route::get('/delete-genre/{id}','App\Http\Controllers\genreController@destroy')->name('delete-genre');
+Route::delete('/delete-genre/{id}','App\Http\Controllers\genreController@destroy')->name('delete-genre');
 
 
 

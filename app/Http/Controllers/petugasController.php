@@ -68,8 +68,12 @@ class petugasController extends Controller
     {
         $hapus = User::findorfail($id);
 
-
         $hapus->delete();
-        return back();
+        $lastPage = ceil(User::count() / 4);
+       if (request()->input('page') == $lastPage && User::count() % 4 == 1) {
+        return redirect()->route('halaman-petugas')->with('success', 'Data berhasil dihapus!')->with('page', 1);
+    } else {
+        return redirect()->route('halaman-petugas')->with('success', 'Data berhasil dihapus!');
+    }
     }
 }
