@@ -24,16 +24,30 @@ Route::middleware('hakAkses')->group(function () {
     Route::get('/halaman-anggota','App\Http\Controllers\anggotaController@index')->name('halaman-anggota');
     Route::get('/halaman-petugas','App\Http\Controllers\petugasController@index')->name('halaman-petugas');
     Route::get('/halaman-genre','App\Http\Controllers\genreController@index')->name('halaman-genre');
+
+    // tambah
+    Route::get('/tambah-buku','App\Http\Controllers\bukuController@create')->name('tambah-buku');
+    Route::get('/tambah-pengarang','App\Http\Controllers\pengarangController@create')->name('tambah-pengarang');
+    Route::get('/tambah-penerbit','App\Http\Controllers\penerbitController@create')->name('tambah-penerbit');
+    Route::get('/tambah-anggota','App\Http\Controllers\anggotaController@create')->name('tambah-anggota');
+    Route::get('/tambah-genre','App\Http\Controllers\genreController@create')->name('tambah-genre');
+
+    // edit
+    Route::get('/edit-buku/{id}','App\Http\Controllers\bukuController@edit')->name('edit-buku');
+    Route::get('/edit-pengarang/{id}','App\Http\Controllers\pengarangController@edit')->name('edit-pengarang');
+    Route::get('/edit-penerbit/{id}','App\Http\Controllers\penerbitController@edit')->name('edit-penerbit');
+    Route::get('/edit-anggota/{id}','App\Http\Controllers\anggotaController@edit')->name('edit-anggota');
+    Route::get('/edit-genre/{id}','App\Http\Controllers\genreController@edit')->name('edit-genre');
 });
 
 
 // Controller buku
 
-Route::get('/tambah-buku','App\Http\Controllers\bukuController@create')->name('tambah-buku');
+
 
 Route::post('/simpan-buku','App\Http\Controllers\bukuController@store')->name('simpan-buku');
 
-Route::get('/edit-buku/{id}','App\Http\Controllers\bukuController@edit')->name('edit-buku');
+
 
 Route::put('/update-buku/{id}','App\Http\Controllers\bukuController@update')->name('update-buku');
 
@@ -42,11 +56,10 @@ Route::delete('/delete-buku/{id}','App\Http\Controllers\bukuController@destroy')
 
 // Controller pengarang
 
-Route::get('/tambah-pengarang','App\Http\Controllers\pengarangController@create')->name('tambah-pengarang');
+
 
 Route::post('/simpan-pengarang','App\Http\Controllers\pengarangController@store')->name('simpan-pengarang');
 
-Route::get('/edit-pengarang/{id}','App\Http\Controllers\pengarangController@edit')->name('edit-pengarang');
 
 Route::put('/update-pengarang/{id}','App\Http\Controllers\pengarangController@update')->name('update-pengarang');
 
@@ -67,11 +80,10 @@ Route::post('/update-karya-pengarang/{id}','App\Http\Controllers\karyaController
 
 // controller penerbit
 
-Route::get('/tambah-penerbit','App\Http\Controllers\penerbitController@create')->name('tambah-penerbit');
 
 Route::post('/simpan-penerbit','App\Http\Controllers\penerbitController@store')->name('simpan-penerbit');
 
-Route::get('/edit-penerbit/{id}','App\Http\Controllers\penerbitController@edit')->name('edit-penerbit');
+
 
 Route::put('/update-penerbit/{id}','App\Http\Controllers\penerbitController@update')->name('update-penerbit');
 
@@ -80,11 +92,11 @@ Route::delete('/delete-penerbit/{id}','App\Http\Controllers\penerbitController@d
 
 // controller anggota
 
-Route::get('/tambah-anggota','App\Http\Controllers\anggotaController@create')->name('tambah-anggota');
+
 
 Route::post('/simpan-anggota','App\Http\Controllers\anggotaController@store')->name('simpan-anggota');
 
-Route::get('/edit-anggota/{id}','App\Http\Controllers\anggotaController@edit')->name('edit-anggota');
+
 
 Route::put('/update-anggota/{id}','App\Http\Controllers\anggotaController@update')->name('update-anggota');
 
@@ -120,11 +132,10 @@ Route::delete('/delete-petugas/{id}','App\Http\Controllers\petugasController@des
 
 // controller genre
 
-Route::get('/tambah-genre','App\Http\Controllers\genreController@create')->name('tambah-genre');
+
 
 Route::post('/simpan-genre','App\Http\Controllers\genreController@store')->name('simpan-genre');
 
-Route::get('/edit-genre/{id}','App\Http\Controllers\genreController@edit')->name('edit-genre');
 
 Route::put('/update-genre/{id}','App\Http\Controllers\genreController@update')->name('update-genre');
 

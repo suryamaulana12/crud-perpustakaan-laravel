@@ -78,7 +78,7 @@
                                         <td>{{ $item->no_telepon }}</td>
                                         <td class="d-flex justify-content-around">
                                             <a href="{{ url('edit-penerbit', $item->id) }}"><button type="submit"
-                                                    class="btn btn-warning" style="margin-right: -20px;"><i
+                                                    class="btn btn-warning" style="margin-right: -10px;"><i
                                                         class="fas fa-pen"></i></button></a>
                                             <form action="/delete-penerbit/{{ $item->id }}" method="POST"
                                                 class="delete-form" id="delete-form-{{ $item->id }}">

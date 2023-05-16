@@ -47,7 +47,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="#">
             <i class="fas fa-arrow-right"></i>
             <span>Logout</span></a>
     </li>

@@ -8,7 +8,7 @@ use App\Models\genre;
 use App\Models\penerbit;
 use App\Models\pengarang;
 use Illuminate\Support\Facades\File;
-
+use Carbon\Carbon;
 
 class bukuController extends Controller
 {
@@ -82,6 +82,14 @@ class bukuController extends Controller
 
         $nm->move(public_path().'/template/img', $namaFile);
         $dtUpload->save();
+        // Menghitung jumlah notifikasi
+$jumlahNotifikasi = Buku::where('created_at', '>', Carbon::now()->subDays(7))->count();
+
+// Mengirim notifikasi ke view
+return redirect('halaman-buku')->with('success', 'Data Berhasil Tersimpan!')->with('jumlahNotifikasi', $jumlahNotifikasi);
+
+        session()->flash('success', 'Data buku berhasil ditambahkan!');
+
 
       return redirect('halaman-buku')->with('success', 'Data Berhasil Tersimpan!');
     }

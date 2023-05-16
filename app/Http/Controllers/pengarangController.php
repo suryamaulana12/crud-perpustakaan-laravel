@@ -100,10 +100,10 @@ class pengarangController extends Controller
         $ubah = pengarang::findorfail($id);
 
         $pengarang = [
-            'pengarang_id' => $request['pengarang_id'],
-            'jenis_kelamin' => $request['jenis_kelamin'],
-            'alamat' => $request['alamat'],
-            'karya_pengarang' => $request['karya_pengarang'],
+            'pengarang_id' => $request->pengarang_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'karya_pengarang' => $request->karya_pengarang,
         ];
 
         $ubah->update($pengarang);

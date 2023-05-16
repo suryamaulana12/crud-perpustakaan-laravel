@@ -47,7 +47,7 @@ class penerbitController extends Controller
             'no_telepon' => 'required|min:12|max:14|unique:penerbit,no_telepon'
         ],[
 
-            'penerbit_id.unique' => 'pengarang sudah ditambahkan, coba edit karyanya aja',
+            'penerbit_id.unique' => 'penerbit sudah ditambahkan, coba edit karyanya aja',
             
             'terbitan_populer.required' => 'Bidang terbitan populer wajib diisi.',
             'terbitan_populer.min' => 'karakter harus lebih dari 5 karakter',
@@ -122,14 +122,14 @@ class penerbitController extends Controller
             'no_telepon.max' => 'Bidang no telepon harus maksimal 14 karakter.'
         ]);
 
-        $pengarang = [
+        $penerbit = [
             'penerbit_id' => $request->penerbit_id,
             'terbitan_populer' => $request->terbitan_populer,
             'alamat' => $request->alamat,
             'no_telepon' => $request->no_telepon,
         ];
 
-        $ubah->update($pengarang);
+        $ubah->update($penerbit);
     
         return redirect('halaman-penerbit')->with('success', 'Data Berhasil Update!');
     }
